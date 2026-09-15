@@ -265,8 +265,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    spinBetVal.textContent = selectedBet;
-    spinStatusLabel.textContent = 'BALL IN PLAY...';
+    if (spinBetVal) spinBetVal.textContent = selectedBet;
+    if (spinStatusLabel) spinStatusLabel.textContent = 'BALL IN PLAY...';
 
     // Transition smoothly into State 3
     showView('spin');
@@ -292,7 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // =========================================================
       audio.playLose();
 
-      spinStatusLabel.textContent = `LANDED ON ${resultNumber} ${colorName}`;
+      if (spinStatusLabel) spinStatusLabel.textContent = `LANDED ON ${resultNumber} ${colorName}`;
 
       if (spinLossBadgeNum) spinLossBadgeNum.textContent = resultNumber;
       if (spinLossBadge) spinLossBadge.className = `loss-badge-inline ${badgeClass}`;
@@ -318,7 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
       userCredits += winPayout;
       updateCreditsDisplay();
 
-      spinStatusLabel.textContent = `WINNER! ${resultNumber} ${colorName}`;
+      if (spinStatusLabel) spinStatusLabel.textContent = `WINNER! ${resultNumber} ${colorName}`;
 
       winResultNum.textContent = resultNumber;
       winResultBadge.className = `win-result-circle ${badgeClass}`;
@@ -342,8 +342,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (spinLossHud) spinLossHud.classList.remove('active');
 
     currentRound = 2;
-    roundStatusLabel.textContent = 'FINAL ROUND (2/2)';
-    bettingStepBadge.textContent = 'FINAL ROUND 2 OF 2';
+    if (roundStatusLabel) roundStatusLabel.textContent = 'FINAL ROUND (2/2)';
+    if (bettingStepBadge) bettingStepBadge.textContent = 'FINAL ROUND 2 OF 2';
     bettingInstruction.textContent = 'Final lucky spin! Select ODD, EVEN or ZERO to win your prize:';
 
     // Reset bet selection for round 2
