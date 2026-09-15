@@ -371,12 +371,25 @@ class LiveRouletteEngine {
     ctx.arc(bx, by, ballSize, 0, Math.PI * 2);
     ctx.fill();
 
-    // 4. Physically Shaped Specular Hotspot (Soft halo + tight champagne core)
+    // 4. Cool Blue Studio Ambient Reflection (Top/Right from studio lights)
+    const blueReflGrad = ctx.createRadialGradient(
+      bx + ballSize * 0.25, by - ballSize * 0.35, ballSize * 0.05,
+      bx + ballSize * 0.25, by - ballSize * 0.35, ballSize * 0.55
+    );
+    blueReflGrad.addColorStop(0, 'rgba(100, 195, 255, 0.40)');
+    blueReflGrad.addColorStop(0.5, 'rgba(70, 160, 255, 0.18)');
+    blueReflGrad.addColorStop(1, 'rgba(50, 140, 255, 0)');
+    ctx.fillStyle = blueReflGrad;
+    ctx.beginPath();
+    ctx.arc(bx, by, ballSize, 0, Math.PI * 2);
+    ctx.fill();
+
+    // 5. Physically Shaped Specular Hotspot (Soft halo + tight champagne core)
     const specGrad = ctx.createRadialGradient(
       bx - ballSize * 0.32, by - ballSize * 0.32, 0,
       bx - ballSize * 0.32, by - ballSize * 0.32, ballSize * 0.45
     );
-    specGrad.addColorStop(0, 'rgba(255, 252, 242, 0.90)');
+    specGrad.addColorStop(0, 'rgba(255, 252, 242, 0.92)');
     specGrad.addColorStop(0.35, 'rgba(250, 240, 215, 0.45)');
     specGrad.addColorStop(1, 'rgba(240, 225, 190, 0)');
     ctx.fillStyle = specGrad;
