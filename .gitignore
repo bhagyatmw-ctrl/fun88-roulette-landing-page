@@ -1,0 +1,64 @@
+# Node & Python dependencies
+node_modules/
+__pycache__/
+*.pyc
+
+# Temporary Python calibration & analysis scripts
+scratch_*.py
+build_*.py
+
+# Intermediate test renders, crops & inspection captures
+comp_test_*.jpg
+test_*.png
+test_*.jpg
+inspect_*.png
+flawless*.png
+gleam*.png
+master*.png
+optA*.png
+optB*.png
+opt*.png
+perfect*.png
+photo_*.png
+preview_*.jpg
+pristine_*.png
+real_spindle_*.png
+tc_fit_*.png
+fit_turret_*.png
+cone_*.png
+crop_*.png
+ellipse_*.png
+full_wheel_*.png
+raw_*.png
+rotor_*.png
+spin_frame_*.png
+step*.png
+mobile_spin_frame.png
+turret_*.png
+wheel_*.png
+wood_sample_*.png
+center_grid.png
+r_m_crop.png
+t_m_crop.png
+view_*.jpg
+final_unified_roulette_simulation.jpg
+orig_wheel_center.jpg
+latest_user_screenshot_center.jpg
+spindle_zoom.png
+clean_photo_*.png
+overlay_*.png
+roulette-bowl-clean.png
+roulette-table-clean.jpg
+roulette-wheel-full-preview.png
+roulette-wheel-full.png
+roulette-bowl.png
+roulette-cone.png
+roulette-rotor.png
+rakoon image.png
+Game UI Plan.png
+
+# System & IDE files
+.DS_Store
+Thumbs.db
+*.log
+.vscode/

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>FUN88 Live Casino — Realistic 3D Live Roulette</title>
+  <meta name="description" content="Experience realistic 3D live casino roulette with a live presenter. Choose Odd, Even or Zero, spin the physical wheel and claim your exclusive 488% Welcome Bonus!">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Ambient Golden Dust Particles Canvas -->
+  <canvas id="particles-canvas"></canvas>
+
+  <!-- 3D Gold Celebration Confetti & Coins Canvas -->
+  <canvas id="celebration-canvas"></canvas>
+
+  <!-- GLOBAL PERSISTENT TOP NAVIGATION BAR -->
+  <header class="top-nav" id="top-nav">
+    <div class="brand-group">
+      <div class="brand-logos-container">
+        <img src="logo-fun88.png" alt="FUN88" class="logo-fun88-img">
+        <img src="logo-evolution.png" alt="Evolution Gaming" class="logo-evolution-img">
+      </div>
+      <span class="brand-badge">LIVE STUDIO</span>
+    </div>
+
+    <div class="nav-controls">
+      <!-- Currency Pill (matching live studio screenshot) -->
+      <div class="currency-pill" id="currency-pill">
+        <span>INR (₹)</span>
+      </div>
+
+      <!-- Live Credits Balance Pill (matching live studio screenshot) -->
+      <div class="credits-pill" id="credits-pill">
+        <span class="credits-label">CREDITS</span>
+        <strong class="credits-value" id="credits-val">₹1,042</strong>
+      </div>
+
+      <!-- Round & Live Status Pill -->
+      <div class="round-status-pill">
+        <span class="live-pulse-dot"></span>
+        <span class="round-status-text" id="round-status-label">ROUND 1 OF 2</span>
+      </div>
+
+      <!-- Master Sound Toggle -->
+      <button class="nav-icon-btn sound-toggle-btn" id="sound-toggle-btn" aria-label="Toggle Sound" title="Sound Mute/Unmute">
+        <svg id="sound-icon-on" viewBox="0 0 24 24">
+          <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+        </svg>
+        <svg id="sound-icon-off" viewBox="0 0 24 24" style="display: none;">
+          <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73 4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+        </svg>
+      </button>
+
+      <!-- Help / Game Rules Info Button (matching live studio screenshot) -->
+      <button class="nav-icon-btn help-toggle-btn" id="help-toggle-btn" aria-label="Game Rules & Payouts" title="Game Rules & Payouts">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16h-2v-2h2v2zm1.07-7.75l-.9.92C12.45 11.9 12 12.5 12 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Fully Functional Interactive Game Rules & Payouts Modal -->
+  <div class="rules-modal-overlay" id="rules-modal">
+    <div class="rules-modal-card">
+      <div class="rules-modal-header">
+        <div class="rules-modal-title-group">
+          <img src="logo-evolution.png" alt="Evolution" class="modal-evo-logo">
+          <span class="rules-modal-title">Live Roulette Rules & Payouts</span>
+        </div>
+        <button class="rules-modal-close" id="btn-close-rules" aria-label="Close Rules">✕</button>
+      </div>
+      <div class="rules-modal-body">
+        <div class="rules-payout-grid">
+          <div class="payout-row">
+            <div class="payout-info">
+              <span class="payout-name">ODD Numbers</span>
+              <span class="payout-sub">1, 3, 5, 7, 9, 11, 13... 35 (18 numbers)</span>
+            </div>
+            <span class="payout-odds">Pays 2x (1:1)</span>
+          </div>
+          <div class="payout-row">
+            <div class="payout-info">
+              <span class="payout-name">EVEN Numbers</span>
+              <span class="payout-sub">2, 4, 6, 8, 10, 12, 14... 36 (18 numbers)</span>
+            </div>
+            <span class="payout-odds">Pays 2x (1:1)</span>
+          </div>
+          <div class="payout-row highlight">
+            <div class="payout-info">
+              <span class="payout-name">ZERO (0 Green)</span>
+              <span class="payout-sub">Single 0 European Wheel Pocket</span>
+            </div>
+            <span class="payout-odds highlight">Pays 36x (35:1)</span>
+          </div>
+        </div>
+
+        <div class="rules-info-box">
+          <div class="info-item">
+            <span class="info-label">Return to Player (RTP):</span>
+            <span class="info-val">97.30% (European Single Zero)</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Exclusive Promotion:</span>
+            <span class="info-val gold">488% First Deposit Welcome Bonus</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       VIEWPORT STACK: 4 FULL-SCREEN CINEMATIC GAME STATES
+       ========================================================================= -->
+  <main class="casino-viewport" id="casino-viewport">
+
+    <!-- =======================================================================
+         STATE 1: INTRO / LANDING VIEW (Image 1 Background)
+         ======================================================================= -->
+    <section class="casino-view active" id="view-intro">
+      <picture class="view-bg-picture">
+        <source media="(max-width: 768px)" srcset="Roulette-presenter-mobile-1.png">
+        <img src="Roulette-presenter-desktop-1.png" alt="FUN88 Live Casino Presenter" class="view-bg-img">
+      </picture>
+      <div class="view-lighting-overlay"></div>
+      <div class="view-vignette"></div>
+
+      <!-- State 1 Content: Clean, Blended Hero Section -->
+      <div class="view-content intro-content">
+        <div class="intro-hero-box">
+          <div class="vip-tag">★ VIP LIVE TABLE ★</div>
+          <h1 class="intro-title">
+            REALISTIC 3D<br>
+            <span class="gold-gradient-text">LIVE ROULETTE</span>
+          </h1>
+          <p class="intro-subtitle">
+            Welcome to the table! Choose <strong>ODD</strong>, <strong>EVEN</strong>, or <strong>ZERO</strong>, spin the physical wheel, and claim your exclusive <strong>488% Welcome Bonus</strong>.
+          </p>
+
+          <button class="cta-primary-btn" id="btn-enter-game">
+            <span>ENTER CASINO & PLAY</span>
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+              <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         STATE 2: BETTING / ODD-EVEN-ZERO VIEW (Image 2 Background)
+         ======================================================================= -->
+    <section class="casino-view" id="view-betting">
+      <picture class="view-bg-picture">
+        <source media="(max-width: 768px)" srcset="Roulette-presenter-mobile-2.png">
+        <img src="Roulette-presenter-desktop-2.png" alt="Place your bet on Live Roulette" class="view-bg-img">
+      </picture>
+      <div class="view-lighting-overlay"></div>
+      <div class="view-vignette"></div>
+
+      <!-- State 2 Content: Blended In-Scene Betting HUD -->
+      <div class="view-content betting-content">
+        <div class="betting-hud-card">
+          <div class="hud-header">
+            <span class="hud-step-badge" id="betting-step-badge">ROUND 1 OF 2</span>
+            <h2 class="hud-title">PLACE YOUR BET</h2>
+            <p class="hud-instruction" id="betting-instruction">Choose Odd, Even or Zero to lock your prediction</p>
+          </div>
+
+          <!-- 3 Luxury 3D Bet Pill Buttons -->
+          <div class="bet-pills-container">
+            <button class="bet-pill-3d" data-bet="ODD" id="btn-bet-odd">
+              <div class="pill-dot"></div>
+              <div class="pill-text-wrap">
+                <span class="pill-title">ODD</span>
+                <span class="pill-payout">PAYS 2x</span>
+              </div>
+            </button>
+
+            <button class="bet-pill-3d" data-bet="EVEN" id="btn-bet-even">
+              <div class="pill-dot"></div>
+              <div class="pill-text-wrap">
+                <span class="pill-title">EVEN</span>
+                <span class="pill-payout">PAYS 2x</span>
+              </div>
+            </button>
+
+            <button class="bet-pill-3d" data-bet="ZERO" id="btn-bet-zero">
+              <div class="pill-dot"></div>
+              <div class="pill-text-wrap">
+                <span class="pill-title">ZERO</span>
+                <span class="pill-payout">PAYS 36x</span>
+              </div>
+            </button>
+          </div>
+
+          <!-- Mini Numbers Preview Bar -->
+          <div class="numbers-preview-card">
+            <div class="numbers-preview-label">Covered Table Numbers:</div>
+            <div class="numbers-preview-pills" id="numbers-preview-pills"></div>
+          </div>
+
+          <!-- Action Button to Launch Wheel Spin -->
+          <button class="cta-spin-btn" id="btn-spin-wheel" disabled>
+            <span>SPIN THE ROULETTE</span>
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         STATE 3: LIVE ROULETTE / SPINNING VIEW (Image 3 Background + Precision Canvas)
+         ======================================================================= -->
+    <section class="casino-view" id="view-spin">
+      <picture class="view-bg-picture">
+        <source media="(max-width: 768px)" srcset="Roulette-presenter-mobile-3.png">
+        <img src="Roulette-presenter-desktop-3.png" alt="Live Physical Roulette Wheel" class="view-bg-img" id="spin-bg-img">
+      </picture>
+      <div class="view-lighting-overlay"></div>
+
+      <!-- Integrated Realistic Physics Roulette Canvas Overlay -->
+      <div class="live-roulette-wrapper" id="live-roulette-wrapper">
+        <canvas id="live-roulette-canvas"></canvas>
+      </div>
+
+      <!-- Live Spin Status HUD (Blended In-Scene Banner) -->
+      <div class="spin-hud-overlay" id="spin-hud-overlay">
+        <div class="spin-status-badge">
+          <span class="spin-status-pulse"></span>
+          <span id="spin-status-label">BALL IN PLAY...</span>
+        </div>
+        <div class="spin-bet-indicator" id="spin-bet-indicator">
+          YOUR BET: <strong id="spin-bet-val">EVEN</strong>
+        </div>
+      </div>
+
+      <!-- In-Scene Round 1 Loss Banner (No intrusive popup) -->
+      <div class="spin-loss-hud-banner" id="spin-loss-hud">
+        <div class="loss-badge-inline" id="spin-loss-badge">
+          <span id="spin-loss-badge-num">27</span>
+        </div>
+        <div class="loss-hud-text">
+          <span class="loss-hud-title">NO WIN THIS ROUND</span>
+          <span class="loss-hud-desc">Ball landed on <strong id="spin-loss-desc">27 RED</strong>. One more spin — you're ready for Round 2!</span>
+        </div>
+        <button class="loss-hud-btn" id="btn-loss-continue">CONTINUE TO ROUND 2 →</button>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         STATE 4: WINNING CELEBRATION VIEW (Image 4 Background)
+         ======================================================================= -->
+    <section class="casino-view" id="view-win">
+      <picture class="view-bg-picture">
+        <source media="(max-width: 768px)" srcset="Roulette-presenter-mobile-4.png">
+        <img src="Roulette-presenter-desktop-4.png" alt="Winning Roulette Celebration" class="view-bg-img">
+      </picture>
+      <div class="view-lighting-overlay"></div>
+      <div class="view-vignette"></div>
+
+      <!-- State 4 Content: Seamlessly Blended In-Scene Win HUD -->
+      <div class="view-content win-content">
+        <div class="win-grand-banner">
+          <div class="win-result-circle" id="win-result-badge">
+            <span id="win-result-num">14</span>
+          </div>
+
+          <div class="win-titles-group">
+            <span class="win-tag">★ JACKPOT WINNER ★</span>
+            <h2 class="win-headline">YOU WIN!</h2>
+            <div class="win-multiplier-pill">x2 BIG WIN MULTIPLIER</div>
+            <p class="win-desc">Winning Number <strong id="win-number-desc">14 RED</strong> matches your bet!</p>
+          </div>
+
+          <!-- 488% Welcome Bonus In-Scene Card -->
+          <div class="bonus-claim-card">
+            <div class="bonus-badge-top">EXCLUSIVE CLAIM</div>
+            <div class="bonus-big-num">488%</div>
+            <div class="bonus-title">WELCOME BONUS</div>
+            
+            <div class="bonus-timer-row">
+              <span>SPECIAL OFFER EXPIRES IN:</span>
+              <strong id="bonus-countdown">04:59</strong>
+            </div>
+
+            <button class="cta-claim-bonus-btn" id="btn-claim-bonus">
+              <span>CLAIM 488% BONUS NOW</span>
+              <svg viewBox="0 0 24 24" width="22" height="22">
+                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Core Scripts -->
+  <script src="audio.js"></script>
+  <script src="roulette.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
