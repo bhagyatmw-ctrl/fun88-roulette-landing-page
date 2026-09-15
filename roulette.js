@@ -220,14 +220,14 @@ class LiveRouletteEngine {
     // 4. Physical Ball Orbit Decay (Calibrated to unified 3D wheel geometry)
     if (progress < 0.50) {
       // High-speed outer ball track orbit (in the recessed metallic bowl track)
-      this.ballRadiusRatio = 0.795;
+      this.ballRadiusRatio = 0.685;
       this.ballHeight = 0;
       this.ballAngle = freeBallAngle;
     } else if (progress < 0.76) {
       // Deflector diamond bounce zone (drops inward with realistic physical hops)
       const dropProgress = (progress - 0.50) / 0.26;
-      this.ballRadiusRatio = 0.795 - (0.795 - 0.66) * dropProgress;
-      this.ballHeight = Math.abs(Math.sin(dropProgress * Math.PI * 8)) * 6.5 * (1 - dropProgress);
+      this.ballRadiusRatio = 0.685 - (0.685 - 0.52) * dropProgress;
+      this.ballHeight = Math.abs(Math.sin(dropProgress * Math.PI * 8)) * 5.5 * (1 - dropProgress);
       this.ballAngle = freeBallAngle;
 
       if (timestamp - this.lastBounceTime > 110 && this.bounceCount < 14) {
@@ -240,8 +240,8 @@ class LiveRouletteEngine {
     } else if (progress < 0.92) {
       // Rattling across cast brass pocket frets
       const fretProgress = (progress - 0.76) / 0.16;
-      this.ballRadiusRatio = 0.66 - (0.66 - 0.53) * fretProgress;
-      this.ballHeight = Math.abs(Math.sin(fretProgress * Math.PI * 11)) * 3.2 * (1 - fretProgress);
+      this.ballRadiusRatio = 0.52 - (0.52 - 0.413) * fretProgress;
+      this.ballHeight = Math.abs(Math.sin(fretProgress * Math.PI * 11)) * 2.8 * (1 - fretProgress);
 
       const blend = Math.min(1, Math.max(0, (progress - 0.78) / 0.14));
       let diff = (targetPocketGlobalAngle - freeBallAngle) % (Math.PI * 2);
@@ -258,7 +258,7 @@ class LiveRouletteEngine {
       }
     } else {
       // Firmly settled in winning pocket (locked with zero relative slide)
-      this.ballRadiusRatio = 0.53;
+      this.ballRadiusRatio = 0.413;
       this.ballHeight = 0;
       this.ballAngle = targetPocketGlobalAngle;
     }
@@ -320,7 +320,7 @@ class LiveRouletteEngine {
     const dist = rFull * this.ballRadiusRatio;
     const bx = cx + Math.cos(this.ballAngle) * dist;
     const by = cy + Math.sin(this.ballAngle) * dist - this.ballHeight;
-    const ballSize = Math.max(5.5, Math.round(rFull * 0.030));
+    const ballSize = Math.max(4.8, Math.round(rFull * 0.024));
 
     ctx.save();
     
@@ -413,8 +413,8 @@ class LiveRouletteEngine {
 
     const a1 = -pocketAngleStep / 2;
     const a2 = pocketAngleStep / 2;
-    const rIn = rWheel * (236.0 / 512.0);
-    const rOut = rWheel * (366.0 / 512.0);
+    const rIn = rWheel * (174.0 / 512.0);
+    const rOut = rWheel * (296.0 / 512.0);
 
     // Soft warm amber illumination inside the pocket
     ctx.fillStyle = `rgba(235, 190, 85, ${0.25 + pulse * 0.22})`;
